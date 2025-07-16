@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>Buat Account Baru!</h1>
+    <h3>Sign Up Form</h3>
+    <form method="POST" action="/welcome">
+        @csrf   
+        
+      <label>First Name:</label> <br /><br />
+      <input type="text" name="firstname" /><br /><br />
+      <label>Last Name:</label> <br /><br />
+      <input type="text" name="lastname" /> <br />
+      <br />
+      <label>Password:</label> <br /><br />
+      <input type="password" name="pass" /> <br /><br />
+      <label>Gender</label> <br /><br />
+      <input type="radio" value="1" /> Male <br />
+      <input type="radio" value="2" /> Female <br />
+      <input type="radio" value="2" /> Other <br />
+      <br />
+
+      <label>Nationality:</label> <br /><br />
+      <select name="kota">
+        <option value="1">Indonesia</option>
+        <option value="2">Rusia</option>
+        <option value="3">China</option>
+        <option value="4">Amerika</option>
+        <option value="5">Singapura</option>
+      </select>
+      <br />
+      <br />
+
+      <label>Leaguage Spoken:</label> <br /><br />
+      <input type="checkbox" value="1" name="skill" />Bahasa Indonesia <br />
+      <input type="checkbox" value="2" name="skill" />English <br />
+      <input type="checkbox" value="3" name="skill" />Other<br />
+      <br />
+      <label>Bio:</label><br /><br>
+      <textarea name="bio" cols="35" rows="10"></textarea><br>
+      <input type="submit" value="Sign Up" />
+    </form>
+</body>
+</html>
