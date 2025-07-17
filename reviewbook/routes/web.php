@@ -8,3 +8,8 @@ use App\Http\Controllers\FormController;
 Route::get('/', [DashboardController::class, 'home']);
 Route::get('/register', [FormController::class, 'formdaftar']);
 Route::post('/welcome', [FormController::class, 'welcome']);
+
+Route::get('/master', function(){
+    return view ('layouts.master');
+    
+});
