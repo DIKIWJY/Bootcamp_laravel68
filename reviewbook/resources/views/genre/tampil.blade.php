@@ -33,13 +33,17 @@
                                 @auth
                                     @if (Auth()->user()->role === 'admin')
                                         <a href="/genre/{{ $item->id }}/edit" class="btn btn-warning btn-sm">Edit</a>
-                                        @csrf
-                                        @method('DELETE')
 
-                                        <input type="submit" value="Delete" class="btn btn-danger btn-sm">
+                                        <form action="/genre/{{ $item->id }}" method="POST"
+                                            onsubmit="return confirm('Yakin ingin menghapus genre ini?')"
+                                            style="display: inline-block;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input type="submit" value="Delete" class="btn btn-danger btn-sm">
+                                        </form>
                                     @endif
                                 @endauth
-                                </form>
+                            </div>
                         </td>
                     </tr>
                 @empty
