@@ -1,47 +1,55 @@
 @extends('layouts.master')
 @section('title')
-    Halaman Tampil Genre
+    Halaman Genre
 @endsection()
 @section('h2')
-    Tampil Genre
+    Daftar Genre
 @endsection
 @section('content')
-    <a href="/genre/create" class="btn btn-primary btn-sm my-2">Create</a>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse ($genres as $item)
+    @auth
+        @if (Auth()->user()->role === 'admin')
+            <a href="/genre/create" class="btn btn-primary btn-sm my-2">Create</a>
+        @endif
+    @endauth
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle">
+            <thead class="table-light">
                 <tr>
-                    <th scope="row">{{ $loop->iteration }}</th>
-                    <td>{{ $item->name }}</td>
-                    <td>
-
-                        <form action="/genre/{{ $item->id }}" method="POST">
-                            <a href="/genre/{{ $item->id }}" class="btn btn-info btn-sm">Detail</a>
-                            <a href="/genre/{{ $item->id }}/edit" class="btn btn-warning btn-sm">Edit</a>
-                            @csrf
-                            @method('DELETE')
-
-                            <input type="submit" value="Delete" class="btn btn-danger btn-sm">
-                        </form>
-                    </td>
-                    </td>
+                    <th scope="col">No</th>
+                    <th scope="col">Nama Genre</th>
+                    <th scope="col" class="text-center">Aksi</th>
                 </tr>
+            </thead>
+            <tbody>
+                @forelse ($genres as $item)
+                    <tr>
+                        <th scope="row">{{ $loop->iteration }}</th>
+                        <td>{{ $item->name }}</td>
+                        <td class="text-center">
+                            <div class="d-flex justify-content-center gap-1 flex-wrap">
+                                <a href="/genre/{{ $item->id }}" class="btn btn-info btn-sm">Detail</a>
 
-            @empty
-                <tr>
-                    <td>
-                        <h1>Tidak ada Genre</h1>
-                    </td>
-                </tr>
-            @endforelse
+                                @auth
+                                    @if (Auth()->user()->role === 'admin')
+                                        <a href="/genre/{{ $item->id }}/edit" class="btn btn-warning btn-sm">Edit</a>
+                                        @csrf
+                                        @method('DELETE')
 
-        </tbody>
-    </table>
-@endsection
+                                        <input type="submit" value="Delete" class="btn btn-danger btn-sm">
+                                    @endif
+                                @endauth
+                                </form>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td>
+                            <h1>Tidak ada Genre</h1>
+                        </td>
+                    </tr>
+                @endforelse
+
+            </tbody>
+        </table>
+    @endsection
